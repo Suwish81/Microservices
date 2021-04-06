@@ -21,22 +21,22 @@ import java.util.Map;
 
 @Configuration
 @EnableTransactionManagement
-@EnableJpaRepositories(entityManagerFactoryRef = "entityManagerFactory"
+@EnableJpaRepositories(entityManagerFactoryRef = "h2EntityManagerFactory"
         , basePackages = {"com.wish.batch.data.h2.repository"}
-        ,transactionManagerRef = "transactionManager")
+        ,transactionManagerRef = "h2TransactionManager")
 public class H2DbConfig {
 
     @Primary
-    @Bean(name = "datasource")
+    @Bean(name = "h2Datasource")
     @ConfigurationProperties(prefix = "spring.h2.datasource")
     public DataSource datasource() {
         return DataSourceBuilder.create().build();
     }
 
     @Primary
-    @Bean(name="entityManagerFactory")
+    @Bean(name="h2EntityManagerFactory")
     @PersistenceContext(unitName = "primary")
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(EntityManagerFactoryBuilder builder, @Qualifier("datasource") DataSource datasource) {
+    public LocalContainerEntityManagerFactoryBean h2EntityManagerFactory(EntityManagerFactoryBuilder builder, @Qualifier("h2Datasource") DataSource datasource) {
 
         Map<String,Object> properties = new HashMap<>();
         properties.put("hibernate.hbm2ddl.auto","update");
@@ -48,8 +48,8 @@ public class H2DbConfig {
     }
 
     @Primary
-    @Bean(name ="transactionManager")
-    public PlatformTransactionManager transactionManager(@Qualifier("entityManagerFactory") EntityManagerFactory entityManagerFactory){
+    @Bean(name ="h2TransactionManager")
+    public PlatformTransactionManager transactionManager(@Qualifier("h2EntityManagerFactory") EntityManagerFactory entityManagerFactory){
         return new JpaTransactionManager(entityManagerFactory);
     }
 

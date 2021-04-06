@@ -33,7 +33,7 @@ public class OracleDbConfig {
 
     @Bean(name="oracleEntityManagerFactory")
     @PersistenceContext(unitName = "oracle")
-    public LocalContainerEntityManagerFactoryBean bookEntityManagerFactory(EntityManagerFactoryBuilder builder,
+    public LocalContainerEntityManagerFactoryBean oracleEntityManagerFactory(EntityManagerFactoryBuilder builder,
                                                                            @Qualifier("oracleDatasource") DataSource datasource) {
 
         Map<String,Object> properties = new HashMap<>();
