@@ -18,4 +18,5 @@ public class BatchStep {
     ItemWriter writer;
     int chunkSize;
 
+
 }

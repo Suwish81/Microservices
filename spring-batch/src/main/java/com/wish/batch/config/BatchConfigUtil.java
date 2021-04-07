@@ -1,5 +1,7 @@
 package com.wish.batch.config;
 
+import com.wish.batch.listeners.JobExecutionListener;
+import com.wish.batch.listeners.StepExecListner;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.Step;
 import org.springframework.batch.core.configuration.annotation.DefaultBatchConfigurer;
@@ -24,8 +26,17 @@ import javax.sql.DataSource;
 public class BatchConfigUtil{
     @Autowired
     JobBuilderFactory jobBuilderFactory;
+
     @Autowired
     StepBuilderFactory stepBuilderFactory;
+
+    @Autowired
+    @Qualifier("stepExecListner")
+    StepExecListner stepExecListner;
+
+    @Autowired
+    @Qualifier("jobExecutionListener")
+    JobExecutionListener jobExecutionListener;
 
 
     public Job registerJob(String jobName,BatchStep... batchSteps){
@@ -36,6 +47,7 @@ public class BatchConfigUtil{
             return jobBuilderFactory
                     .get(jobName)
                     .incrementer(new RunIdIncrementer())
+                    .listener(jobExecutionListener)
                     .start(createStep(batchSteps[0]))
                     .build();
 
@@ -77,7 +89,7 @@ public class BatchConfigUtil{
         if(batchStep.getWriter()!=null){
             simpleStepBuilder = simpleStepBuilder.writer(batchStep.getWriter());
         }
-
+        simpleStepBuilder.listener(stepExecListner);
         return simpleStepBuilder.build();
     }
 }

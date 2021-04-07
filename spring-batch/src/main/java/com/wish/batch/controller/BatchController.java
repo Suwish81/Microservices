@@ -38,6 +38,7 @@ public class BatchController {
         while(jobExecution.isRunning()){
             System.out.print("=");
         }
+
         return ResponseEntity.ok(jobExecution.getStatus());
     }
 }
