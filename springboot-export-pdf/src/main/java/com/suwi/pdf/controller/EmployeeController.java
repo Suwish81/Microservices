@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.util.List;
 
 import com.suwi.pdf.repository.EmployeeRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
@@ -20,6 +22,8 @@ import com.suwi.pdf.util.PDFGenerator;
 @RestController
 @RequestMapping("/api/pdf")
 public class EmployeeController {
+
+
 
 	@Autowired
 	EmployeeRepository employeeRepository;
