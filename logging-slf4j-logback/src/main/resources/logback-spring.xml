@@ -94,7 +94,7 @@
         <logger name="org.springframework" level="INFO" additivity="false">
             <appender-ref ref="FILE-ROLLING"/>
         </logger>
-        <logger name="com.suwi.logging" level="info" additivity="false">
+        <logger name="com.suwi.logging" level="ERROR" additivity="false">
             <appender-ref ref="ASYNC"/>
         </logger>
         <logger name="com.suwi.logging.logback.HelloController" level="ERROR" additivity="false">
