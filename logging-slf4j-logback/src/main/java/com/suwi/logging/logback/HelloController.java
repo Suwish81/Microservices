@@ -2,28 +2,35 @@ package com.suwi.logging.logback;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MarkerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("/api")
 public class HelloController {
 
     private static final Logger logger = LoggerFactory.getLogger(HelloController.class);
 
-    @GetMapping("/")
-    public String hello(Model model) {
+    @GetMapping("/test")
+    public String hello() {
+        System.out.println(logger.getClass().getProtectionDomain().getCodeSource().getLocation().getPath());
+        logger.debug("This is a debug message");
+        logger.info("This is an info message");
+        logger.warn("This is a warn message");
+        logger.error("This is an error message");
+        new SpringLoggingHelper().helpMethod();
 
-        List<Integer> data = Arrays.asList(1, 2, 3, 4, 5);
+        logger.info(MarkerFactory.getMarker("NOTIFY_APP_SUPPORT"),"This is an info message with NOTIFY_APP_SUPPORT");
+        logger.info(MarkerFactory.getMarker("STATUS"),"This is an info message with STATUS");
 
-        logger.debug("Hello from Logback {}", data);
-
-        model.addAttribute("num", data);
-
-        return "index"; // index.html
+        return "indexd"; // index.html
     }
 
 }

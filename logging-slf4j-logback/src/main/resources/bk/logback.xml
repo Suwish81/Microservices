@@ -21,7 +21,7 @@
         </encoder>
     </appender>
 
-    <logger name="com.mkyong" level="debug" additivity="false">
+    <logger name="com.suwi.logging.logback" level="debug" additivity="false">
         <appender-ref ref="FILE-ROLLING"/>
     </logger>
 
