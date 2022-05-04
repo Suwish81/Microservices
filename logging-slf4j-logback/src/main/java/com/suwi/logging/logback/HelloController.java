@@ -1,5 +1,6 @@
 package com.suwi.logging.logback;
 
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MarkerFactory;
@@ -10,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api")
@@ -29,6 +32,8 @@ public class HelloController {
 
         logger.info(MarkerFactory.getMarker("NOTIFY_APP_SUPPORT"),"This is an info message with NOTIFY_APP_SUPPORT");
         logger.info(MarkerFactory.getMarker("STATUS"),"This is an info message with STATUS");
+
+
 
         return "indexd"; // index.html
     }
